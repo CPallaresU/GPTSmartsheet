@@ -1,0 +1,93 @@
+Important video: https://www.youtube.com/watch?v=awFLzy0XwXo&t=495s&ab_channel=SoumilShah
+
+
+Build docker image:
+docker build . -f Docker -t smartgpt
+
+
+create smartsheet_gpt.pem:
+
+https://www.youtube.com/watch?v=awFLzy0XwXo&ab_channel=SoumilShah
+
+
+Run ec2 server:
+
+ssh -i "smartsheet_gpt.pem" ec2-user@ec2-54-208-155-188.compute-1.amazonaws.com
+
+
+----------------
+
+DOCKER:
+
+docker build -t hola-image .
+docker create --name hola-container -it hola-image
+docker start hola-container
+docker exec -it hola-container service supervisor start
+docker exec -it hola-container bash
+python Test.py
+
+- Crear un git del deploy
+- Crear ubuntu en aws
+- Instalar docker
+- repetir los comandos de arriba
+
+Como actualizar la api key:
+
+- Buscar api-key nueva y pegarla en Test.py
+- subir Test.py a github nuevamente
+- repetir pasos previos
+
+Como Iniciar servicio de aws:
+
+- Iniciar instancia usando Putty, agregando:
+
+IP: ec2-107-23-95-214.compute-1.amazonaws.com 
+puerto: 22
+
+- Ir a Connection, SSH, Auth, Credentials y agregar private key chatgpt_02_15.ppk
+- Click en open 
+- log as: ubuntu
+- Ejecutar:
+docker exec -it hola-container service supervisor start
+docker exec -it hola-container bash
+python Test.py
+
+
+----------------------
+Instalar docker en Ubuntu
+
+sudo apt update
+sudo apt install ca-certificates curl gnupg lsb-release
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io
+
+
+
+-------
+Error
+
+If you want to run docker as non-root user then you need to add it to the docker group.
+
+Create the docker group if it does not exist
+$ sudo groupadd docker
+Add your user to the docker group.
+$ sudo usermod -aG docker $USER
+Log in to the new docker group (to avoid having to log out / log in again; but if not enough, try to reboot):
+$ newgrp docker
+
+Check if docker can be run without root
+$ docker run hello-world
+Reboot if still got error
+
+$ reboot
+
+
+
+
+
+
+
