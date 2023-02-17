@@ -29,9 +29,8 @@ def evaluate_row_and_build_updates(source_row):
     if request_value != None and response_value == None:
         #gpt_prompt = api.send_message(request_value)  # ChatGPT Prompt
         #gpt_response=gpt_prompt['message'] # ChatGPT Response
-
-        completion = openai.Completion.create(engiene="text-davinci-003",propmt=request_value,max_tokens=2048)
-
+        completion = openai.Completion.create(model="text-davinci-003",prompt=request_value,max_tokens=2048)
+    
         # Build new cell value
         new_cell = smart.models.Cell()
         new_cell.column_id = column_map["Response"]
@@ -49,7 +48,7 @@ def evaluate_row_and_build_updates(source_row):
 
 
 
-openai.api_key="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" #openain api key
+openai.api_key="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"
 
 
 
